@@ -47,11 +47,11 @@ class RoboteqEsc(Node):
             cmd = "!b"+self.to_hex(msg.axes[4])+"\r"
             self.ser.write(cmd.encode())
             self.get_logger().info('Right Thruster percent: %s cmd: %s' % (msg.axes[4]*100,cmd))
-        if msg.axes[4] > 0: #Controls the right thruster when driving forward
+        if msg.axes[4] >= 0: #Controls the right thruster when driving forward
             cmd = "!B"+self.to_hex(msg.axes[4])+"\r"
             self.ser.write(cmd.encode())
             self.get_logger().info('Right Thruster percent: %s cmd: %s' % (msg.axes[4]*100,cmd))
-        if msg.axes[1] > 0: #Controls the left thruster when driving forward
+        if msg.axes[1] >= 0: #Controls the left thruster when driving forward
             cmd = "!A"+self.to_hex(msg.axes[1])+"\r"
             self.ser.write(cmd.encode())
             self.get_logger().info('Left Thruster percent: %s cmd: "%s"' % (msg.axes[1]*100,cmd))
