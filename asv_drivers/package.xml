@@ -4,11 +4,8 @@
   <name>asv_drivers</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="comit@todo.todo">comit</maintainer>
+  <maintainer email="kkrasnosky@gmail.com">k2</maintainer>
   <license>TODO: License declaration</license>
-  
-  <exec_depend>rclpy</exec_depend>
-  <exec_depend>std_msgs</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
