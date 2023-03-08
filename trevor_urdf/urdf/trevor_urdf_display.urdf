@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<robot name="trevor">
+  <link name="base_link">
+    <visual>
+        <geometry>
+            <mesh filename="/home/comit/ros2_ws/src/asv/trevor_urdf/meshes/base_link.stl"/>
+        </geometry>
+    </visual>
+  </link>
+</robot>
+
+
+
