@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<robot name="trevor">
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://urdf_tutorial/meshes/usv_box.dae"/>
+      </geometry>
+    </visual>
+  </link>
+</robot>
