@@ -1,4 +1,65 @@
-microstrain_inertial_driver:
-    ros__parameters:
 
-        port        : "/dev/ttyACM0"
+port: /dev/ttyUSB0
+baudrate    : 115200
+set_baud : False
+
+use_device_timestamp : True
+imu_data_rate : 20
+use_enu_frame : True
+filter_child_frame_id : "ins"
+
+
+# Antenna #1 lever arm offset vector
+#     For GQ7 - in the vehicle frame wrt IMU origin (meters)
+#     For all other models - in the IMU frame wrt IMU origin (meters)
+#     Note: Make this as accurate as possible for good performance
+gnss1_antenna_offset : [0.0, -0.7, -1.0]
+
+gnss2_antenna_offset : [0.0, 0.7, -1.0]
+
+# (GQ7 Only) Reference point lever arm offset control.
+#   Note: This offset will affect the position and velocity measurements in the following topics: nav/odom, nav/relative_pos/odom
+#   Note: This offset is in the vehicle reference frame.
+filter_lever_arm_offset: [0.0, 0.0, 0.0]
+
+
+# (GQ7 only) Filter Initialization control
+
+#   Init Condition source =
+#   0 - auto pos, vel, attitude (default)
+#   1 - auto pos, vel, roll, pitch, manual heading
+#   2 - auto pos, vel, manual attitude
+#   3 - manual pos, vel, attitude
+#
+#   Auto-Heading alignment selector (note this is a bitfield, you can use more than 1 source) =
+#   Bit 0 - Dual-antenna GNSS
+#   Bit 1 - GNSS kinematic (requires motion, e.g. a GNSS velocity)
+#   Bit 2 - Magnetometer
+#
+#   Reference frame =
+#   1 - WGS84 Earth-fixed, earth centered (ECEF) position, velocity, attitude
+#   2 - WGS84 Latitude, Longitude, height above ellipsoid position, NED velocity and attitude
+
+filter_init_condition_src              : 0
+filter_auto_heading_alignment_selector : 1
+filter_init_reference_frame            : 1
+filter_init_position : [0.0, 0.0, 0.0]
+filter_init_velocity : [0.0, 0.0, 0.0]
+filter_init_attitude : [0.0, 0.0, 0.0]
+
+# (GQ7 only) Relative Position Configuration
+#   Reference frame =
+#   1 - Relative ECEF position
+#   2 - Relative LLH position
+#
+#   Source =
+#   0 - Position will be reported relative to the base station. filter_relative_position_ref will be ignored
+#   1 - Position will be reported relative to filter_relative_position_ref
+#
+#   Reference position - Units provided by reference frame (ECEF - meters, LLH - deg, deg, meters)
+#   Note: prior to firmware version 1.0.06 this command will fail for non-positive heights.  1.0.06 fixes this)
+filter_relative_position_config : True
+filter_relative_position_frame  : 1
+filter_relative_position_source : 1
+filter_relative_position_ref    : [724525.0, -5601494., 2952996.0]
+
