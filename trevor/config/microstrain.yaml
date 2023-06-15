@@ -1,10 +1,10 @@
 
-port: /dev/ttyUSB0
+port: /dev/ttyACM0
 baudrate    : 115200
 set_baud : False
 
 use_device_timestamp : True
-imu_data_rate : 20
+imu_data_rate : 100
 use_enu_frame : True
 filter_child_frame_id : "ins"
 
