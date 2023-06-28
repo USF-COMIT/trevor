@@ -42,19 +42,19 @@ class RoboteqEsc(Node):
         if msg.axes[1] < 0: #Controls the left thruster when in reverse
             cmd = "!a"+self.to_hex(msg.axes[1])+"\r"
             self.ser.write(cmd.encode())
-            self.get_logger().info('Left Thruster percent: %s cmd: %s' % (msg.axes[1]*100,cmd))
+            self.get_logger().debug('Left Thruster percent: %s cmd: %s' % (msg.axes[1]*100,cmd))
         if msg.axes[4] < 0: #Controls the left thruster when in reverse
             cmd = "!b"+self.to_hex(msg.axes[4])+"\r"
             self.ser.write(cmd.encode())
-            self.get_logger().info('Right Thruster percent: %s cmd: %s' % (msg.axes[4]*100,cmd))
+            self.get_logger().debug('Right Thruster percent: %s cmd: %s' % (msg.axes[4]*100,cmd))
         if msg.axes[4] >= 0: #Controls the right thruster when driving forward
             cmd = "!B"+self.to_hex(msg.axes[4])+"\r"
             self.ser.write(cmd.encode())
-            self.get_logger().info('Right Thruster percent: %s cmd: %s' % (msg.axes[4]*100,cmd))
+            self.get_logger().debug('Right Thruster percent: %s cmd: %s' % (msg.axes[4]*100,cmd))
         if msg.axes[1] >= 0: #Controls the left thruster when driving forward
             cmd = "!A"+self.to_hex(msg.axes[1])+"\r"
             self.ser.write(cmd.encode())
-            self.get_logger().info('Left Thruster percent: %s cmd: "%s"' % (msg.axes[1]*100,cmd))
+            self.get_logger().debug('Left Thruster percent: %s cmd: "%s"' % (msg.axes[1]*100,cmd))
         
         	
 def main(args=None):
@@ -69,7 +69,7 @@ def main(args=None):
     # Destroy the node explicitly
     # (optional - otherwise it will be done automatically
     # when the garbage collector destroys the node object)
-    minimal_subscriber.destroy_node()
+    esc.destroy_node()
     rclpy.shutdown()
 
 

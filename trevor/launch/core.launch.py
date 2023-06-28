@@ -1,5 +1,6 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from ament_index_python.packages import get_package_share_path
 
 def generate_launch_description():
     return LaunchDescription([
@@ -12,7 +13,14 @@ def generate_launch_description():
                 {"joy_topic":   'joy'},
                 {"esc_port":    '/dev/ttyUSB0'}
             ]
-        )#,
+        ),
+        Node(
+            package='usb_cam',
+            namespace='t1',
+            executable='usb_cam_node_exe',
+            name='antenna_cam',
+        )
+        #,
 #        Node(
 #            package='joy',
 #            namespace='t1',

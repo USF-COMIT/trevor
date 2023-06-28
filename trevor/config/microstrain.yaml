@@ -13,9 +13,9 @@ filter_child_frame_id : "ins"
 #     For GQ7 - in the vehicle frame wrt IMU origin (meters)
 #     For all other models - in the IMU frame wrt IMU origin (meters)
 #     Note: Make this as accurate as possible for good performance
-gnss1_antenna_offset : [0.0, -0.7, -1.0]
+gnss1_antenna_offset : [-0.5, 0.7, -0.1]
 
-gnss2_antenna_offset : [0.0, 0.7, -1.0]
+gnss2_antenna_offset : [-0.5, -0.7, -0.1]
 
 # (GQ7 Only) Reference point lever arm offset control.
 #   Note: This offset will affect the position and velocity measurements in the following topics: nav/odom, nav/relative_pos/odom

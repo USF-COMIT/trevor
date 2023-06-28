@@ -37,7 +37,7 @@ def generate_launch_description():
 
   # Declare arguments with default values
   launch_description = []
-  launch_description.append(DeclareLaunchArgument('namespace',   default_value='/trevor/nav/sensors',                description='Namespace to use when launching the nodes in this launch file'))
+  launch_description.append(DeclareLaunchArgument('namespace',   default_value='/t1/nav/sensors',                description='Namespace to use when launching the nodes in this launch file'))
   launch_description.append(DeclareLaunchArgument('node_name',   default_value='microstrain',      description='Name to give the Microstrain Inertial Driver node'))
   launch_description.append(DeclareLaunchArgument('configure',   default_value='true',            description='Whether or not to configure the node on startup'))
   launch_description.append(DeclareLaunchArgument('activate',    default_value='true',            description='Whether or not to activate the node on startup'))

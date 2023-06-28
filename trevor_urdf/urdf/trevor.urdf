@@ -12,7 +12,7 @@
   <link name="base_link">
     <visual>
       <geometry>
-        <mesh filename="package://urdf_tutorial/meshes/usv_box.dae"/>
+        <mesh filename="package://trevor_urdf/meshes/usv_box.dae"/>
       </geometry>
       <origin rpy="0 0 3.14159" xyz="0 0 0"/>
     </visual>
@@ -21,7 +21,7 @@
   <link name="frame">
       <visual>
           <geometry>
-            <mesh filename="package://urdf_tutorial/meshes/frame.dae"/>
+            <mesh filename="package://trevor_urdf/meshes/frame.dae"/>
           </geometry>
           <origin rpy="0 0 1.57075" xyz="0.578 -0.02 -0.01"/>
       </visual>
@@ -36,7 +36,7 @@
   <link name="thrusters">
       <visual>
           <geometry>
-            <mesh filename="package://urdf_tutorial/meshes/thruster.dae"/>
+            <mesh filename="package://trevor_urdf/meshes/thruster.dae"/>
           </geometry>
           <origin rpy="0 0 1.57075" xyz="0.02 0.063 -0.586"/>
       </visual>
