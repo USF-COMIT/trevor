@@ -7,21 +7,26 @@ from std_msgs.msg import String
 from sensor_msgs.msg import Joy
 import serial
 
+from asv_interface.msg import ThrustCmd
+
 
 class RoboteqEsc(Node):
 
     def __init__(self):
         super().__init__('roboteq_esc')
 
-        self.declare_parameter('joy_topic'  , 'joy')
+        self.declare_parameter('cmd_topic'  , '/t1/thrust_cmd')
         self.declare_parameter('esc_port'   , '/dev/ttyUSB0')
 
-        self.joy_topic = self.get_parameter('joy_topic').get_parameter_value().string_value
+        self.left_thruster = 0
+        self.right_thruster= 1
+
+        self.cmd_topic = self.get_parameter('cmd_topic').get_parameter_value().string_value
         self.esc_port  = self.get_parameter('esc_port').get_parameter_value().string_value
 
         self.subscription = self.create_subscription(
-            Joy,
-            self.joy_topic,
+            ThrustCmd,
+            self.cmd_topic,
             self.listener_callback,
             10)
         self.subscription  # prevent unused variable warning
@@ -39,22 +44,22 @@ class RoboteqEsc(Node):
         return raw_hex
 
     def listener_callback(self, msg):
-        if msg.axes[1] < 0: #Controls the left thruster when in reverse
-            cmd = "!a"+self.to_hex(msg.axes[1])+"\r"
+        if msg.cmd[self.left_thruster] < 0: #Controls the left thruster when in reverse
+            cmd = "!a"+self.to_hex(msg.cmd[self.left_thruster])+"\r"
             self.ser.write(cmd.encode())
-            self.get_logger().debug('Left Thruster percent: %s cmd: %s' % (msg.axes[1]*100,cmd))
-        if msg.axes[4] < 0: #Controls the left thruster when in reverse
-            cmd = "!b"+self.to_hex(msg.axes[4])+"\r"
+            self.get_logger().debug('Left Thruster percent: %s cmd: %s' % (msg.cmd[self.left_thruster]*100,cmd))
+        if msg.cmd[self.right_thruster] < 0: #Controls the left thruster when in reverse
+            cmd = "!b"+self.to_hex(msg.cmd[self.right_thruster])+"\r"
             self.ser.write(cmd.encode())
-            self.get_logger().debug('Right Thruster percent: %s cmd: %s' % (msg.axes[4]*100,cmd))
-        if msg.axes[4] >= 0: #Controls the right thruster when driving forward
-            cmd = "!B"+self.to_hex(msg.axes[4])+"\r"
+            self.get_logger().debug('Right Thruster percent: %s cmd: %s' % (msg.cmd[self.right_thruster]*100,cmd))
+        if msg.cmd[self.right_thruster] >= 0: #Controls the right thruster when driving forward
+            cmd = "!B"+self.to_hex(msg.cmd[self.right_thruster])+"\r"
             self.ser.write(cmd.encode())
-            self.get_logger().debug('Right Thruster percent: %s cmd: %s' % (msg.axes[4]*100,cmd))
-        if msg.axes[1] >= 0: #Controls the left thruster when driving forward
-            cmd = "!A"+self.to_hex(msg.axes[1])+"\r"
+            self.get_logger().debug('Right Thruster percent: %s cmd: %s' % (msg.cmd[self.right_thruster]*100,cmd))
+        if msg.cmd[self.left_thruster] >= 0: #Controls the left thruster when driving forward
+            cmd = "!A"+self.to_hex(msg.cmd[self.left_thruster])+"\r"
             self.ser.write(cmd.encode())
-            self.get_logger().debug('Left Thruster percent: %s cmd: "%s"' % (msg.axes[1]*100,cmd))
+            self.get_logger().debug('Left Thruster percent: %s cmd: "%s"' % (msg.cmd[self.left_thruster]*100,cmd))
         
         	
 def main(args=None):
