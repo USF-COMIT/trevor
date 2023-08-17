@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<robot name="trevor">
+
+  <link name="ins">
+  </link>
+  <joint name="ins_to_base" type="fixed">
+    <parent link="ins"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://trevor_urdf/meshes/usv_box.dae"/>
+      </geometry>
+      <origin rpy="0 0 3.14159" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <link name="frame">
+      <visual>
+          <geometry>
+            <mesh filename="package://trevor_urdf/meshes/frame.dae"/>
+          </geometry>
+          <origin rpy="0 0 1.57075" xyz="0.578 -0.02 -0.01"/>
+      </visual>
+  </link>
+
+  <joint name="box_to_frame" type="fixed">
+    <parent link="base_link"/>
+    <child link="frame"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <link name="thrusters">
+      <visual>
+          <geometry>
+            <mesh filename="package://trevor_urdf/meshes/thruster.dae"/>
+          </geometry>
+          <origin rpy="0 0 1.57075" xyz="0.02 0.063 -0.586"/>
+      </visual>
+  </link>
+
+  <joint name="frame_to_thrusters" type="fixed">
+    <parent link="frame"/>
+    <child link="thrusters"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+</robot>
