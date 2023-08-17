@@ -19,7 +19,28 @@ def generate_launch_description():
             namespace='t1',
             executable='usb_cam_node_exe',
             name='antenna_cam',
+        ),
+        Node(
+            package='trevor',
+            namespace='t1',
+            executable='pilot.py',
+            name='pilot',
+        ),
+        Node(
+            package='trevor',
+            namespace='t1',
+            executable='project11_interface.py',
+            name='project11_interface',
         )
+
+
+        # Node(
+        #     package='usb_cam',
+        #     namespace='t1',
+        #     executable='usb_cam_node_exe',
+        #     name='antenna_cam',
+        # ),
+
         #,
 #        Node(
 #            package='joy',
