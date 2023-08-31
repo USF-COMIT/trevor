@@ -65,10 +65,6 @@ def generate_launch_description():
       {
         "debug" : LaunchConfiguration('debug')
       },
-    ],
-    remappings = [
-      ('/input/pose', '/turtlesim1/turtle1/pose'),
-      ('/output/cmd_vel', '/turtlesim2/turtle1/cmd_vel'),
     ]
   )
 
