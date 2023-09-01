@@ -27,8 +27,84 @@ class EmAttitude:
                             int(self.heave*100),
                             int(self.heading*100)
                             )
-        print(bytes)
+        #print(bytes)
         return bytes
+
+class KmBinary:
+    def __init__(self):
+        self.start_id = "#KMB"
+        self.datagram_length = 132
+        self.datagram_version = 1
+        self.utc_seconds = 0
+        self.utc_nanoseconds = 0
+        self.status_word = 0
+        self.latitude = 0
+        self.longitude = 0
+        self.ellipsoid_height = 0
+        self.roll = 0
+        self.pitch = 0
+        self.heading = 0
+        self.heave = 0
+        self.roll_rate = 0
+        self.pitch_rate = 0
+        self.yaw_rate = 0
+        self.north_velocity = 0
+        self.east_velocity = 0
+        self.down_velocity = 0
+        self.latitude_error = 0
+        self.longitude_error = 0
+        self.height_error = 0
+        self.roll_error = 0
+        self.pitch_error = 0
+        self.heading_error = 0
+        self.heave_error = 0
+        self.north_acceleration = 0
+        self.east_acceleration = 0
+        self.down_acceleration = 0
+        # delayed heave:
+        self.dh_utc_seconds = 0
+        self.dh_utc_nanoseconds = 0
+        self.delayed_heave = 0
+
+    def encode(self):
+        bytes = struct.pack("<4cHHLLLddfffffffffffffffffffffLLL",
+                            bytes(self.start_id, 'utf-8'),
+                            self.datagram_length,
+                            self.datagram_version,
+                            self.utc_seconds,
+                            self.utc_nanoseconds,
+                            self.status_word,
+                            self.latitude,
+                            self.longitude,
+                            self.ellipsoid_height,
+                            self.roll,
+                            self.pitch,
+                            self.heading,
+                            self.heave,
+                            self.roll_rate,
+                            self.pitch_rate,
+                            self.yaw_rate,
+                            self.north_velocity,
+                            self.east_velocity,
+                            self.down_velocity,
+                            self.latitude_error,
+                            self.longitude_error,
+                            self.height_error,
+                            self.roll_error,
+                            self.pitch_error,
+                            self.heading_error,
+                            self.heave_error,
+                            self.north_acceleration,
+                            self.east_acceleration,
+                            self.down_acceleration,
+                            # delayed heave:
+                            self.dh_utc_seconds,
+                            self.dh_utc_nanoseconds,
+                            self.delayed_heave
+                            )
+
+
+
 
 
 
@@ -48,10 +124,10 @@ class KongsbergInterface(Node):
         self.gga_id = self.get_parameter('nmea/gga_id').get_parameter_value().string_value
 
         self.declare_parameter('serial/nmea/port', '/dev/ttyUSB0')
-        self.declare_parameter('serial/nmea/baud', '9600')
+        self.declare_parameter('serial/nmea/baud', 9600)
 
         self.declare_parameter('serial/binary/port', '/dev/ttyUSB2')
-        self.declare_parameter('serial/binary/baud', '19200')
+        self.declare_parameter('serial/binary/baud', 19200)
 
 
         self.nmea_serial = serial.Serial(
@@ -83,7 +159,7 @@ class KongsbergInterface(Node):
             self.nmea_callback,
             1)
     def odom_callback(self, odom_msg):
-        self.get_logger().info('odom:')
+        #self.get_logger().info('odom:')
         datagram = EmAttitude()
         self.binary_serial.write(datagram.encode())
 
@@ -97,11 +173,11 @@ class KongsbergInterface(Node):
             self.gga_callback(nmea_msg.sentence)
 
     def zda_callback(self, zda_sentence):
-        self.get_logger().info('encoding zda: %s' % zda_sentence)
+        #self.get_logger().info('encoding zda: %s' % zda_sentence)
         self.nmea_serial.write(zda_sentence.encode())
 
     def gga_callback(self, gga_sentence):
-        self.get_logger().info('encoding gga: %s' % gga_sentence)
+        #self.get_logger().info('encoding gga: %s' % gga_sentence)
         self.nmea_serial.write(gga_sentence.encode())
 
 

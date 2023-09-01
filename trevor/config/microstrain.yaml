@@ -152,3 +152,63 @@ filter_nmea_rmc_data_rate: 0
 filter_nmea_hdt_data_rate: 0
 filter_nmea_prka_data_rate: 0  # Note that this message_id will not have any talker ID on it since it is proprietary and can only come from the filter descriptor set
 
+
+#  (GQ7/CV7 only) GPIO Configuration
+#    Notes:    For information on possible configurations and specific pin options
+#              refer to the MSCL MipNodeFeatures command, supportedGpioConfigurations.
+#
+#    GQ7 GPIO Pins =
+#    1 - GPIO1 (primary port pin 7) - Features = 0 - Unused, 1 - GPIO, 2 - PPS, 3 - Encoder
+#    2 - GPIO2 (primary port pin 9) - Features = 0 - Unused, 1 - GPIO, 2 - PPS, 3 - Encoder
+#    3 - GPIO3 (aux port pin 7)     - Features = 0 - Unused, 1 - GPIO, 2 - PPS, 3 - Encoder
+#    4 - GPIO4 (aux port pin 9)     - Features = 0 - Unused, 1 - GPIO, 2 - PPS, 3 - Encoder
+#
+#    CV7 GPIO Pins =
+#    1 - GPIO1 (pin 7)  - Features = 0 - Unused, 1 - GPIO, 2 - PPS
+#    2 - GPIO2 (pin 9)  - Features = 0 - Unused, 1 - GPIO, 2 - PPS
+#    3 - GPIO3 (pin 6)  - Features = 0 - Unused, 1 - GPIO, 2 - PPS
+#    4 - GPIO4 (pin 10) - Features = 0 - Unused, 1 - GPIO, 2 - PPS
+#
+#    Feature:
+#    0 - Unused   - Behaviors = 0 - unused
+#    1 - GPIO     - Behaviors = 0 - unused, 1 - input, 2 - output low, 3 - output high
+#    2 - PPS      - Behaviors = 0 - unused, 1 - input, 2 - output
+#    3 - Encoder  - Behaviors = 0 - unused, 1 - enc A, 2 - enc B
+#
+#    GPIO Behavior:
+#    0 - Unused
+#    1 - Input
+#    2 - Output Low
+#    3 - Output High
+#
+#    PPS Behavior:
+#    0 - Unused
+#    1 - Input
+#    2 - Output
+#
+#    Encoder Behavior:
+#    0 - Unused
+#    1 - Encoder A
+#    2 - Encoder B
+#
+#    Pin Mode Bitfield:
+#    1 - open drain
+#    2 - pulldown
+#    4 - pullup
+gpio_config    : True
+
+gpio1_feature  : 0
+gpio1_behavior : 0
+gpio1_pin_mode : 0
+
+gpio2_feature  : 0
+gpio2_behavior : 0
+gpio2_pin_mode : 0
+
+gpio3_feature  : 2
+gpio3_behavior : 2
+gpio3_pin_mode : 0
+
+gpio4_feature  : 0  # 2 for pps
+gpio4_behavior : 0  # 2 for output
+gpio4_pin_mode : 0  # 0 not needed for PPS
