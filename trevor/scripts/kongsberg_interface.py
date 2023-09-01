@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import math
 
 import rclpy
 from rclpy.node import Node
@@ -9,6 +10,9 @@ from sensor_msgs.msg import Imu
 from sensor_msgs.msg import NavSatFix
 from nmea_msgs.msg import Sentence
 import socket
+
+from euler_from_quaternion import *
+
 
 import serial
 import struct
@@ -171,30 +175,50 @@ class KongsbergInterface(Node):
             1)
     def odom_callback(self, odom_msg):
         #self.get_logger().info('odom:')
+        (roll, pitch, yaw) = euler_from_quaternion(odom_msg.pose.pose.orientation.x,
+                               odom_msg.pose.pose.orientation.y,
+                               odom_msg.pose.pose.orientation.z,
+                               odom_msg.pose.pose.orientation.w)
+
+        roll *= 180/math.pi
+        pitch *= - 180 / math.pi
+        yaw *= 180 / math.pi
+
+        (roll_ned, pitch_ned, hdg) = euler_from_quaternion( odom_msg.pose.pose.orientation.y,
+                                                            odom_msg.pose.pose.orientation.x,
+                                                            -odom_msg.pose.pose.orientation.z,
+                                                            odom_msg.pose.pose.orientation.w)
+
+        hdg *= 180 /math.pi
+        hdg = hdg + 90
+        while hdg < 0:
+            hdg += 360
+
+
         datagram = KmBinary()
         datagram.utc_seconds = odom_msg.header.stamp.sec
         datagram.utc_nanoseconds = odom_msg.header.stamp.nanosec
-        datagram.status_word = 0b00011100000000000000000000000000
+        datagram.status_word = 0b10011100000000000000000000000000
         datagram.latitude = odom_msg.pose.pose.position.x
         datagram.longitude = odom_msg.pose.pose.position.y
         datagram.ellipsoid_height = odom_msg.pose.pose.position.z
-        datagram.roll = 1.1
-        datagram.pitch = 2.2
-        datagram.heading = 3.3
+        datagram.roll = roll
+        datagram.pitch = pitch
+        datagram.heading = hdg
         datagram.heave = 0
-        datagram.roll_rate = 0
-        datagram.pitch_rate = 0
-        datagram.yaw_rate = 0
+        datagram.roll_rate = odom_msg.twist.twist.angular.x * 180 /math.pi
+        datagram.pitch_rate = -odom_msg.twist.twist.angular.y * 180 /math.pi
+        datagram.yaw_rate = -odom_msg.twist.twist.angular.z * 180 /math.pi
         datagram.north_velocity = 0
         datagram.east_velocity = 0
         datagram.down_velocity = 0
-        datagram.latitude_error = 0
-        datagram.longitude_error = 0
-        datagram.height_error = 0
-        datagram.roll_error = 0
-        datagram.pitch_error = 0
-        datagram.heading_error = 0
-        datagram.heave_error = 0
+        datagram.latitude_error = -1
+        datagram.longitude_error = -1
+        datagram.height_error = -1
+        datagram.roll_error = -1
+        datagram.pitch_error = -1
+        datagram.heading_error = -1
+        datagram.heave_error = -1
         datagram.north_acceleration = 0
         datagram.east_acceleration = 0
         datagram.down_acceleration = 0
