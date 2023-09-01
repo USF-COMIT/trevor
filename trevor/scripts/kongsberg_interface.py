@@ -1,21 +1,18 @@
 #!/usr/bin/env python3
-import math
 
 import rclpy
 from rclpy.node import Node
 
 from nav_msgs.msg import Odometry
-from geometry_msgs.msg import TwistWithCovarianceStamped
-from sensor_msgs.msg import Imu
 from sensor_msgs.msg import NavSatFix
 from nmea_msgs.msg import Sentence
 import socket
 
 from euler_from_quaternion import *
 
-
 import serial
 import struct
+
 
 class EmAttitude:
     def __init__(self):
@@ -23,17 +20,19 @@ class EmAttitude:
         self.pitch = 2.2
         self.heave = 3.3
         self.heading = 4.4
+
     def encode(self):
         bytes = struct.pack("<BBhhhh",
                             0x90,
                             0x90,
-                            int(self.roll*100),
-                            int(self.pitch*100),
-                            int(self.heave*100),
-                            int(self.heading*100)
+                            int(self.roll * 100),
+                            int(self.pitch * 100),
+                            int(self.heave * 100),
+                            int(self.heading * 100)
                             )
-        #print(bytes)
+        # print(bytes)
         return bytes
+
 
 class KmBinary:
     def __init__(self):
@@ -72,49 +71,48 @@ class KmBinary:
         self.delayed_heave = 0
 
     def encode(self):
-        #<4sHHLLLddfffffffffffffffffffffLLL
+        # <4sHHLLLddfffffffffffffffffffffLLL
         datagram = struct.pack("<4s2H3I2d21fIIf",
-                            bytes(self.start_id, 'utf-8'),
-                            self.datagram_length,
-                            self.datagram_version,
-                            self.utc_seconds,
-                            self.utc_nanoseconds,
-                            self.status_word,
-                            self.latitude,
-                            self.longitude,
-                            self.ellipsoid_height,
-                            self.roll,
-                            self.pitch,
-                            self.heading,
-                            self.heave,
-                            self.roll_rate,
-                            self.pitch_rate,
-                            self.yaw_rate,
-                            self.north_velocity,
-                            self.east_velocity,
-                            self.down_velocity,
-                            self.latitude_error,
-                            self.longitude_error,
-                            self.height_error,
-                            self.roll_error,
-                            self.pitch_error,
-                            self.heading_error,
-                            self.heave_error,
-                            self.north_acceleration,
-                            self.east_acceleration,
-                            self.down_acceleration,
-                            # delayed heave:
-                            self.dh_utc_seconds,
-                            self.dh_utc_nanoseconds,
-                            self.delayed_heave
-                            )
-        #print(datagram)
+                               bytes(self.start_id, 'utf-8'),
+                               self.datagram_length,
+                               self.datagram_version,
+                               self.utc_seconds,
+                               self.utc_nanoseconds,
+                               self.status_word,
+                               self.latitude,
+                               self.longitude,
+                               self.ellipsoid_height,
+                               self.roll,
+                               self.pitch,
+                               self.heading,
+                               self.heave,
+                               self.roll_rate,
+                               self.pitch_rate,
+                               self.yaw_rate,
+                               self.north_velocity,
+                               self.east_velocity,
+                               self.down_velocity,
+                               self.latitude_error,
+                               self.longitude_error,
+                               self.height_error,
+                               self.roll_error,
+                               self.pitch_error,
+                               self.heading_error,
+                               self.heave_error,
+                               self.north_acceleration,
+                               self.east_acceleration,
+                               self.down_acceleration,
+                               # delayed heave:
+                               self.dh_utc_seconds,
+                               self.dh_utc_nanoseconds,
+                               self.delayed_heave
+                               )
+        # print(datagram)
         return datagram
 
+
 def set_bit(value, bit):
-    return value | (1<<bit)
-
-
+    return value | (1 << bit)
 
 
 class KongsbergInterface(Node):
@@ -122,7 +120,7 @@ class KongsbergInterface(Node):
     def __init__(self):
         super().__init__('pilot')
 
-        self.declare_parameter('sub/odom_topic','/t1/nav/sensors/nav/odom')
+        self.declare_parameter('sub/odom_topic', '/t1/nav/sensors/nav/odom')
         self.declare_parameter('sub/fix_topic', '/t1/nav/sensors/nav/fix')
         self.declare_parameter('sub/nmea_topic', '/t1/nav/sensors/nmea/sentence')
 
@@ -143,7 +141,6 @@ class KongsbergInterface(Node):
         self.udp_ip = self.get_parameter('udp/ip').get_parameter_value().string_value
         self.udp_port = self.get_parameter('udp/port').get_parameter_value().integer_value
 
-
         self.nmea_serial = serial.Serial(
             port=self.get_parameter('serial/nmea/port').get_parameter_value().string_value,
             baudrate=self.get_parameter('serial/nmea/baud').get_parameter_value().integer_value
@@ -153,8 +150,7 @@ class KongsbergInterface(Node):
             baudrate=self.get_parameter('serial/binary/baud').get_parameter_value().integer_value
         )
         self.sock = socket.socket(socket.AF_INET,  # Internet
-                             socket.SOCK_DGRAM)  # UDP
-
+                                  socket.SOCK_DGRAM)  # UDP
 
         self.odom_sub = self.create_subscription(
             Odometry,
@@ -173,27 +169,27 @@ class KongsbergInterface(Node):
             self.get_parameter('sub/nmea_topic').get_parameter_value().string_value,
             self.nmea_callback,
             1)
-    def odom_callback(self, odom_msg):
-        #self.get_logger().info('odom:')
-        (roll, pitch, yaw) = euler_from_quaternion(odom_msg.pose.pose.orientation.x,
-                               odom_msg.pose.pose.orientation.y,
-                               odom_msg.pose.pose.orientation.z,
-                               odom_msg.pose.pose.orientation.w)
 
-        roll *= 180/math.pi
+    def odom_callback(self, odom_msg):
+        # self.get_logger().info('odom:')
+        (roll, pitch, yaw) = euler_from_quaternion(odom_msg.pose.pose.orientation.x,
+                                                   odom_msg.pose.pose.orientation.y,
+                                                   odom_msg.pose.pose.orientation.z,
+                                                   odom_msg.pose.pose.orientation.w)
+
+        roll *= 180 / math.pi
         pitch *= - 180 / math.pi
         yaw *= 180 / math.pi
 
-        (roll_ned, pitch_ned, hdg) = euler_from_quaternion( odom_msg.pose.pose.orientation.y,
-                                                            odom_msg.pose.pose.orientation.x,
-                                                            -odom_msg.pose.pose.orientation.z,
-                                                            odom_msg.pose.pose.orientation.w)
+        (roll_ned, pitch_ned, hdg) = euler_from_quaternion(odom_msg.pose.pose.orientation.y,
+                                                           odom_msg.pose.pose.orientation.x,
+                                                           -odom_msg.pose.pose.orientation.z,
+                                                           odom_msg.pose.pose.orientation.w)
 
-        hdg *= 180 /math.pi
+        hdg *= 180 / math.pi
         hdg = hdg + 90
         while hdg < 0:
             hdg += 360
-
 
         datagram = KmBinary()
         datagram.utc_seconds = odom_msg.header.stamp.sec
@@ -206,9 +202,9 @@ class KongsbergInterface(Node):
         datagram.pitch = pitch
         datagram.heading = hdg
         datagram.heave = 0
-        datagram.roll_rate = odom_msg.twist.twist.angular.x * 180 /math.pi
-        datagram.pitch_rate = -odom_msg.twist.twist.angular.y * 180 /math.pi
-        datagram.yaw_rate = -odom_msg.twist.twist.angular.z * 180 /math.pi
+        datagram.roll_rate = odom_msg.twist.twist.angular.x * 180 / math.pi
+        datagram.pitch_rate = -odom_msg.twist.twist.angular.y * 180 / math.pi
+        datagram.yaw_rate = -odom_msg.twist.twist.angular.z * 180 / math.pi
         datagram.north_velocity = 0
         datagram.east_velocity = 0
         datagram.down_velocity = 0
@@ -226,7 +222,7 @@ class KongsbergInterface(Node):
         datagram.dh_utc_seconds = odom_msg.header.stamp.sec
         datagram.dh_utc_nanoseconds = odom_msg.header.stamp.nanosec
         datagram.delayed_heave = 0
-        #self.binary_serial.write(datagram.encode())
+        # self.binary_serial.write(datagram.encode())
         byte_array = datagram.encode()
         self.sock.sendto(byte_array, (self.udp_ip, self.udp_port))
 
@@ -240,14 +236,12 @@ class KongsbergInterface(Node):
             self.gga_callback(nmea_msg.sentence)
 
     def zda_callback(self, zda_sentence):
-        #self.get_logger().info('encoding zda: %s' % zda_sentence)
+        # self.get_logger().info('encoding zda: %s' % zda_sentence)
         self.nmea_serial.write(zda_sentence.encode())
 
     def gga_callback(self, gga_sentence):
-        #self.get_logger().info('encoding gga: %s' % gga_sentence)
+        # self.get_logger().info('encoding gga: %s' % gga_sentence)
         self.nmea_serial.write(gga_sentence.encode())
-
-
 
 
 def main(args=None):
