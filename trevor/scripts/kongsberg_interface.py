@@ -8,6 +8,7 @@ from geometry_msgs.msg import TwistWithCovarianceStamped
 from sensor_msgs.msg import Imu
 from sensor_msgs.msg import NavSatFix
 from nmea_msgs.msg import Sentence
+import socket
 
 import serial
 import struct
@@ -67,7 +68,8 @@ class KmBinary:
         self.delayed_heave = 0
 
     def encode(self):
-        bytes = struct.pack("<4cHHLLLddfffffffffffffffffffffLLL",
+        #<4sHHLLLddfffffffffffffffffffffLLL
+        datagram = struct.pack("<4s2H3I2d21fIIf",
                             bytes(self.start_id, 'utf-8'),
                             self.datagram_length,
                             self.datagram_version,
@@ -102,8 +104,11 @@ class KmBinary:
                             self.dh_utc_nanoseconds,
                             self.delayed_heave
                             )
+        #print(datagram)
+        return datagram
 
-
+def set_bit(value, bit):
+    return value | (1<<bit)
 
 
 
@@ -129,6 +134,11 @@ class KongsbergInterface(Node):
         self.declare_parameter('serial/binary/port', '/dev/ttyUSB2')
         self.declare_parameter('serial/binary/baud', 19200)
 
+        self.declare_parameter('udp/ip', '192.168.1.102')
+        self.declare_parameter('udp/port', 3000)
+        self.udp_ip = self.get_parameter('udp/ip').get_parameter_value().string_value
+        self.udp_port = self.get_parameter('udp/port').get_parameter_value().integer_value
+
 
         self.nmea_serial = serial.Serial(
             port=self.get_parameter('serial/nmea/port').get_parameter_value().string_value,
@@ -138,7 +148,8 @@ class KongsbergInterface(Node):
             port=self.get_parameter('serial/binary/port').get_parameter_value().string_value,
             baudrate=self.get_parameter('serial/binary/baud').get_parameter_value().integer_value
         )
-        print(self.binary_serial)
+        self.sock = socket.socket(socket.AF_INET,  # Internet
+                             socket.SOCK_DGRAM)  # UDP
 
 
         self.odom_sub = self.create_subscription(
@@ -160,8 +171,40 @@ class KongsbergInterface(Node):
             1)
     def odom_callback(self, odom_msg):
         #self.get_logger().info('odom:')
-        datagram = EmAttitude()
-        self.binary_serial.write(datagram.encode())
+        datagram = KmBinary()
+        datagram.utc_seconds = odom_msg.header.stamp.sec
+        datagram.utc_nanoseconds = odom_msg.header.stamp.nanosec
+        datagram.status_word = 0b00011100000000000000000000000000
+        datagram.latitude = odom_msg.pose.pose.position.x
+        datagram.longitude = odom_msg.pose.pose.position.y
+        datagram.ellipsoid_height = odom_msg.pose.pose.position.z
+        datagram.roll = 1.1
+        datagram.pitch = 2.2
+        datagram.heading = 3.3
+        datagram.heave = 0
+        datagram.roll_rate = 0
+        datagram.pitch_rate = 0
+        datagram.yaw_rate = 0
+        datagram.north_velocity = 0
+        datagram.east_velocity = 0
+        datagram.down_velocity = 0
+        datagram.latitude_error = 0
+        datagram.longitude_error = 0
+        datagram.height_error = 0
+        datagram.roll_error = 0
+        datagram.pitch_error = 0
+        datagram.heading_error = 0
+        datagram.heave_error = 0
+        datagram.north_acceleration = 0
+        datagram.east_acceleration = 0
+        datagram.down_acceleration = 0
+        # delayed heave:
+        datagram.dh_utc_seconds = odom_msg.header.stamp.sec
+        datagram.dh_utc_nanoseconds = odom_msg.header.stamp.nanosec
+        datagram.delayed_heave = 0
+        #self.binary_serial.write(datagram.encode())
+        byte_array = datagram.encode()
+        self.sock.sendto(byte_array, (self.udp_ip, self.udp_port))
 
     def fix_callback(self, fix_msg):
         pass
@@ -187,9 +230,6 @@ def main(args=None):
     rclpy.init(args=args)
 
     kongsberg_interface = KongsbergInterface()
-
-    attitude = EmAttitude()
-    attitude.encode()
 
     rclpy.spin(kongsberg_interface)
 
