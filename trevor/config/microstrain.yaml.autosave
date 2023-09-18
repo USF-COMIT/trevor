@@ -16,7 +16,7 @@ filter_child_frame_id : "ins"
 #     Note: Make this as accurate as possible for good performance
 gnss1_antenna_offset : [-0.8128, 0.2921, 0.1524]
 
-gnss2_antenna_offset : [-0.8128, -0.2921, 0.1524]
+gnss2_antenna_offset : [-0.8128, - 0.2921, 0.1524]
 
 filter_data_rate: 50
 

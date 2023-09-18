@@ -16,6 +16,8 @@ def append_launch(package, launch):
 
 def generate_launch_description():
     return LaunchDescription([
-        append_launch('trevor', '/core.launch.py'),
-        append_launch('trevor', '/microstrain.launch.py')
+        append_launch('trevor', 'core.launch.py'),
+        append_launch('trevor', 'microstrain.launch.py'),
+        append_launch('trevor', 'ntrip.launch.py'),
+        append_launch('trevor', 'kongsberg_interface.py')
     ])

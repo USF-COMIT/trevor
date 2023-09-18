@@ -16,7 +16,7 @@ class RoboteqEsc(Node):
         super().__init__('roboteq_esc')
 
         self.declare_parameter('cmd_topic'  , '/t1/thrust_cmd')
-        self.declare_parameter('esc_port'   , '/dev/ttyUSB0')
+        self.declare_parameter('esc_port'   , '/dev/ttyS3')
 
         self.left_thruster = 0
         self.right_thruster= 1
@@ -44,6 +44,7 @@ class RoboteqEsc(Node):
         return raw_hex
 
     def listener_callback(self, msg):
+
         if msg.cmd[self.left_thruster] < 0: #Controls the left thruster when in reverse
             cmd = "!a"+self.to_hex(msg.cmd[self.left_thruster])+"\r"
             self.ser.write(cmd.encode())

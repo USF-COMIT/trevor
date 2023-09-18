@@ -130,11 +130,11 @@ class KongsbergInterface(Node):
         self.declare_parameter('nmea/gga_id', '$GAGGA')
         self.gga_id = self.get_parameter('nmea/gga_id').get_parameter_value().string_value
 
-        self.declare_parameter('serial/nmea/port', '/dev/ttyUSB0')
+        self.declare_parameter('serial/nmea/port', '/dev/ttyS1')
         self.declare_parameter('serial/nmea/baud', 9600)
 
-        self.declare_parameter('serial/binary/port', '/dev/ttyUSB2')
-        self.declare_parameter('serial/binary/baud', 19200)
+#        self.declare_parameter('serial/binary/port', '/dev/ttyUSB2')
+#        self.declare_parameter('serial/binary/baud', 19200)
 
         self.declare_parameter('udp/ip', '192.168.1.102')
         self.declare_parameter('udp/port', 3000)
@@ -145,10 +145,10 @@ class KongsbergInterface(Node):
             port=self.get_parameter('serial/nmea/port').get_parameter_value().string_value,
             baudrate=self.get_parameter('serial/nmea/baud').get_parameter_value().integer_value
         )
-        self.binary_serial = serial.Serial(
-            port=self.get_parameter('serial/binary/port').get_parameter_value().string_value,
-            baudrate=self.get_parameter('serial/binary/baud').get_parameter_value().integer_value
-        )
+#        self.binary_serial = serial.Serial(
+#            port=self.get_parameter('serial/binary/port').get_parameter_value().string_value,
+#            baudrate=self.get_parameter('serial/binary/baud').get_parameter_value().integer_value
+#        )
         self.sock = socket.socket(socket.AF_INET,  # Internet
                                   socket.SOCK_DGRAM)  # UDP
 

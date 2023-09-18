@@ -1,25 +1,32 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
-from ament_index_python.packages import get_package_share_path
+from ament_index_python.packages import get_package_share_directory
+import os
+
+
 
 def generate_launch_description():
+
+    config = os.path.join(
+        get_package_share_directory('trevor'),
+        'config',
+        'trevor.yaml'
+        )
+
     return LaunchDescription([
         Node(
             package='asv_drivers',
             namespace='t1',
             executable='roboteq_esc',
             name='roboteq_esc',
-            parameters=[
-                {"joy_topic":   'joy'},
-                {"esc_port":    '/dev/ttyUSB0'}
-            ]
+            parameters=[config]
         ),
-        Node(
-            package='usb_cam',
-            namespace='t1',
-            executable='usb_cam_node_exe',
-            name='antenna_cam',
-        ),
+#        Node(
+#            package='usb_cam',
+#            namespace='t1',
+#            executable='usb_cam_node_exe',
+#            name='antenna_cam',
+#        ),
         Node(
             package='trevor',
             namespace='t1',

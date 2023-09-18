@@ -1,0 +1,26 @@
+t1:
+    kongsberg_interface:
+        ros__parameters:
+
+            sub:  # these are the topics to subscribe and  convert to Kongsberg format
+                odom_topic: '/t1/nav/sensors/nav/odom'
+                fix_topic:  '/t1/nav/sensors/nav/fix'
+                nmea_topic: '/t1/nav/sensors/nmea/sentence'
+
+            nmea: # these are the nmea talker IDs we want to rebroadcast
+                zda_id: '$GNZDA'
+                gga_id: '$GAGGA'
+
+            serial:
+                nmea:  # this is the serial port to send nmea data on
+                    port: '/dev/ttyS1'
+                    baud: 9600
+
+            udp:
+                ip:     '192.168.1.102'  # the IP of the kongsberg unit
+                port:   3000
+
+    roboteq_esc:
+        ros__parameters:
+            joy_topic:  'joy'
+            esc_port:   '/dev/ttyUSB0'
