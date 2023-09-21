@@ -19,6 +19,8 @@ def generate_launch_description():
             namespace='t1',
             executable='roboteq_esc',
             name='roboteq_esc',
+            respawn=True,
+            respawn_delay=4,
             parameters=[config]
         ),
 #        Node(
@@ -31,12 +33,16 @@ def generate_launch_description():
             package='trevor',
             namespace='t1',
             executable='pilot.py',
+            respawn=True,
+            respawn_delay=4,
             name='pilot',
         ),
         Node(
             package='trevor',
             namespace='t1',
             executable='project11_interface.py',
+            respawn=True,
+            respawn_delay=4,
             name='project11_interface',
         )
 

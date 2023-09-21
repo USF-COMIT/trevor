@@ -33,6 +33,8 @@ def generate_launch_description():
                 namespace='ntrip_client',
                 package='ntrip_client',
                 executable='ntrip_ros.py',
+                respawn=True,
+                respawn_delay=4,
                 parameters=[
                   {
                     # Required parameters used to connect to the NTRIP server

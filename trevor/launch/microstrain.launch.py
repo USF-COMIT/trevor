@@ -54,6 +54,8 @@ def generate_launch_description():
     executable = "microstrain_inertial_driver_node",
     name       = LaunchConfiguration('node_name'),
     namespace  = LaunchConfiguration('namespace'),
+    respawn=True,
+    respawn_delay=4,
     parameters = [
       # Load the default params file manually, since this is a ROS params file, we will need to load the file manually
       yaml.safe_load(open(_DEFAULT_PARAMS_FILE, 'r')),
