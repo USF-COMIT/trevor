@@ -105,3 +105,9 @@ You can open a version of ROS 1 or 2 RQT GUI using the icons at the left.   Thes
 <figure><img src="../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 Here you can see the status of the Microstrain Nav Sensor
+
+
+
+### Checking the wifi status
+
+you can access radio status throught the shore radio control pannel [https://10.1.1.52/](https://10.1.1.52/)
