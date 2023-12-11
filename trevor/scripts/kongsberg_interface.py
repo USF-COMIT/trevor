@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
+import math
 
 import rclpy
 from rclpy.node import Node
+from rclpy.time import Time
 
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import NavSatFix
 from nmea_msgs.msg import Sentence
 import socket
+import datetime
 
 from euler_from_quaternion import *
 
 import serial
 import struct
+
+import pynmea2
 
 
 class EmAttitude:
@@ -127,11 +132,11 @@ class KongsbergInterface(Node):
         self.declare_parameter('nmea/zda_id', '$GNZDA')
         self.zda_id = self.get_parameter('nmea/zda_id').get_parameter_value().string_value
 
-        self.declare_parameter('nmea/gga_id', '$GAGGA')
+        self.declare_parameter('nmea/gga_id', '$--GGA')  #$GAGGA
         self.gga_id = self.get_parameter('nmea/gga_id').get_parameter_value().string_value
 
         self.declare_parameter('serial/nmea/port', '/dev/ttyS1')
-        self.declare_parameter('serial/nmea/baud', 9600)
+        self.declare_parameter('serial/nmea/baud', 115200)
 
 #        self.declare_parameter('serial/binary/port', '/dev/ttyUSB2')
 #        self.declare_parameter('serial/binary/baud', 19200)
@@ -145,6 +150,10 @@ class KongsbergInterface(Node):
             port=self.get_parameter('serial/nmea/port').get_parameter_value().string_value,
             baudrate=self.get_parameter('serial/nmea/baud').get_parameter_value().integer_value
         )
+
+        baud = self.get_parameter('serial/nmea/baud').get_parameter_value().integer_value
+
+        self.get_logger().info('kongsberg interface baud: %s' % (baud))
 #        self.binary_serial = serial.Serial(
 #            port=self.get_parameter('serial/binary/port').get_parameter_value().string_value,
 #            baudrate=self.get_parameter('serial/binary/baud').get_parameter_value().integer_value
@@ -227,13 +236,44 @@ class KongsbergInterface(Node):
         self.sock.sendto(byte_array, (self.udp_ip, self.udp_port))
 
     def fix_callback(self, fix_msg):
-        pass
+        stamp = datetime.datetime.utcfromtimestamp(fix_msg.header.stamp.sec+fix_msg.header.stamp.nanosec*1e-9)
+        #self.get_logger().info('utc_time: %s' % (str(stamp)))
+        utc_time = str(stamp.hour) + str(stamp.minute) + str(stamp.second+stamp.microsecond*1e-6)
+        #self.get_logger().info('utc_time: %s , %s ,%s' % (str(stamp.hour) , str(stamp.minute) , str(stamp.second+stamp.microsecond*1e-6)))
+        lat_deg = str(abs(math.trunc(fix_msg.latitude)))
+        lat_min = str(abs(fix_msg.latitude) % 1 * 60)
+        lat_dir = ''
+        if fix_msg.latitude > 0:
+            lat_dir = 'N'
+        else:
+            lat_dir = 'S'
+
+
+
+        lon_deg = str(abs(math.trunc(fix_msg.longitude)))
+        lon_min = str(abs(fix_msg.longitude) % 1 * 60)
+        lon_dir = ''
+        if fix_msg.longitude > 0:
+            lon_dir = 'E'
+        else:
+            lon_dir = 'W'
+        quality = '1'
+        num_sat = '24'
+        hdop = '1.0'
+        orthometric_height = str(fix_msg.altitude)
+        geoid_separation = '0'
+        age_of_gps = ''
+        ref_station_id = ''
+
+        msg = pynmea2.GGA('GP', 'GGA', (utc_time, lat_deg+lat_min, lat_dir, lon_deg+lon_min, lon_dir, quality, num_sat, hdop, orthometric_height, 'M', geoid_separation, 'M', age_of_gps, ref_station_id))
+
+        self.gga_callback(str(msg)+str('\r\n'))
 
     def nmea_callback(self, nmea_msg):
         if nmea_msg.sentence.startswith(self.zda_id):
             self.zda_callback(nmea_msg.sentence)
-        if nmea_msg.sentence.startswith(self.gga_id):
-            self.gga_callback(nmea_msg.sentence)
+        #if nmea_msg.sentence.startswith(self.gga_id):
+        #    self.gga_callback(nmea_msg.sentence)
 
     def zda_callback(self, zda_sentence):
         # self.get_logger().info('encoding zda: %s' % zda_sentence)
@@ -241,6 +281,7 @@ class KongsbergInterface(Node):
 
     def gga_callback(self, gga_sentence):
         # self.get_logger().info('encoding gga: %s' % gga_sentence)
+        # self.get_logger().info('gga: %s' % (gga_sentence))
         self.nmea_serial.write(gga_sentence.encode())
 
 

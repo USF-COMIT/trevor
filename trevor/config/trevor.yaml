@@ -14,7 +14,7 @@ t1:
             serial:
                 nmea:  # this is the serial port to send nmea data on
                     port: '/dev/ttyS1'
-                    baud: 9600
+                    baud: 115200
 
             udp:
                 ip:     '192.168.1.102'  # the IP of the kongsberg unit
