@@ -125,57 +125,61 @@ class KongsbergInterface(Node):
     def __init__(self):
         super().__init__('pilot')
 
-        self.declare_parameter('sub/odom_topic', '/t1/nav/sensors/nav/odom')
-        self.declare_parameter('sub/fix_topic', '/t1/nav/sensors/nav/fix')
-        self.declare_parameter('sub/nmea_topic', '/t1/nav/sensors/nmea/sentence')
+        self.declare_parameter('sub.odom_topic', '/t1/nav/sensors/nav/odom')
+        self.declare_parameter('sub.fix_topic', '/t1/nav/sensors/nav/fix')
+        self.declare_parameter('sub.nmea_topic', '/t1/nav/sensors/nmea/sentence')
 
-        self.declare_parameter('nmea/zda_id', '$GNZDA')
-        self.zda_id = self.get_parameter('nmea/zda_id').get_parameter_value().string_value
+        self.declare_parameter('nmea.zda_id', '$GNZDA')
+        self.zda_id = self.get_parameter('nmea.zda_id').get_parameter_value().string_value
 
-        self.declare_parameter('nmea/gga_id', '$--GGA')  #$GAGGA
-        self.gga_id = self.get_parameter('nmea/gga_id').get_parameter_value().string_value
+        self.declare_parameter('nmea.gga_id', '$--GGA')  #$GAGGA
+        self.gga_id = self.get_parameter('nmea.gga_id').get_parameter_value().string_value
 
-        self.declare_parameter('serial/nmea/port', '/dev/ttyS1')
-        self.declare_parameter('serial/nmea/baud', 115200)
+        self.declare_parameter('serial.nmea.port', '/dev/ttyS1')
+        self.declare_parameter('serial.nmea.baud', 115200)
 
-#        self.declare_parameter('serial/binary/port', '/dev/ttyUSB2')
-#        self.declare_parameter('serial/binary/baud', 19200)
+#        self.declare_parameter('serial.binary/port', '/dev/ttyUSB2')
+#        self.declare_parameter('serial.binary/baud', 19200)
 
-        self.declare_parameter('udp/ip', '192.168.1.102')
-        self.declare_parameter('udp/port', 3000)
-        self.udp_ip = self.get_parameter('udp/ip').get_parameter_value().string_value
-        self.udp_port = self.get_parameter('udp/port').get_parameter_value().integer_value
+        self.declare_parameter('udp.ip', '192.168.1.102')
+        self.declare_parameter('udp.port', 3000)
+        self.udp_ip = self.get_parameter('udp.ip').get_parameter_value().string_value
+        self.udp_port = self.get_parameter('udp.port').get_parameter_value().integer_value
 
-        self.nmea_serial = serial.Serial(
-            port=self.get_parameter('serial/nmea/port').get_parameter_value().string_value,
-            baudrate=self.get_parameter('serial/nmea/baud').get_parameter_value().integer_value
-        )
+        baud = self.get_parameter('serial.nmea.baud').get_parameter_value().integer_value
+        self.get_logger().info('Opening Port: %s baud: %s' % (self.get_parameter('serial.nmea.port').get_parameter_value().string_value, baud))
+        try:
+            self.nmea_serial = serial.Serial(
+                port=self.get_parameter('serial.nmea.port').get_parameter_value().string_value,
+                baudrate=self.get_parameter('serial.nmea.baud').get_parameter_value().integer_value
+            )
+        except Exception as ex:
+            self.get_logger().error('An error occurred trying to open the serial port: \n%s' % (str(ex)) )
+            raise SystemExit
 
-        baud = self.get_parameter('serial/nmea/baud').get_parameter_value().integer_value
 
-        self.get_logger().info('kongsberg interface baud: %s' % (baud))
 #        self.binary_serial = serial.Serial(
-#            port=self.get_parameter('serial/binary/port').get_parameter_value().string_value,
-#            baudrate=self.get_parameter('serial/binary/baud').get_parameter_value().integer_value
+#            port=self.get_parameter('serial.binary/port').get_parameter_value().string_value,
+#            baudrate=self.get_parameter('serial.binary/baud').get_parameter_value().integer_value
 #        )
         self.sock = socket.socket(socket.AF_INET,  # Internet
                                   socket.SOCK_DGRAM)  # UDP
 
         self.odom_sub = self.create_subscription(
             Odometry,
-            self.get_parameter('sub/odom_topic').get_parameter_value().string_value,
+            self.get_parameter('sub.odom_topic').get_parameter_value().string_value,
             self.odom_callback,
             1)
 
         self.fix_sub = self.create_subscription(
             NavSatFix,
-            self.get_parameter('sub/fix_topic').get_parameter_value().string_value,
+            self.get_parameter('sub.fix_topic').get_parameter_value().string_value,
             self.fix_callback,
             1)
 
         self.nmea_sub = self.create_subscription(
             Sentence,
-            self.get_parameter('sub/nmea_topic').get_parameter_value().string_value,
+            self.get_parameter('sub.nmea_topic').get_parameter_value().string_value,
             self.nmea_callback,
             1)
 

@@ -19,5 +19,5 @@ def generate_launch_description():
         append_launch('trevor', 'core.launch.py'),
         append_launch('trevor', 'microstrain.launch.py'),
         append_launch('trevor', 'ntrip.launch.py'),
-        append_launch('trevor', 'kongsberg_interface.py')
+        append_launch('trevor', 'kongsberg_interface.launch.py')
     ])
