@@ -23,12 +23,6 @@ def generate_launch_description():
             respawn_delay=4,
             parameters=[config]
         ),
-#        Node(
-#            package='usb_cam',
-#            namespace='t1',
-#            executable='usb_cam_node_exe',
-#            name='antenna_cam',
-#        ),
         Node(
             package='trevor',
             namespace='t1',
@@ -45,24 +39,4 @@ def generate_launch_description():
             respawn_delay=4,
             name='project11_interface',
         )
-
-
-        # Node(
-        #     package='usb_cam',
-        #     namespace='t1',
-        #     executable='usb_cam_node_exe',
-        #     name='antenna_cam',
-        # ),
-
-        #,
-#        Node(
-#            package='joy',
-#            namespace='t1',
-#            executable='joy_node',
-#            name='joy',
-#            parameters=[
-#                {"autorepeat_rate":   2.0},
-#                {"coalesce_interval_ms":   100}
-#            ]
-#        ),
     ])

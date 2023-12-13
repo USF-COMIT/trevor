@@ -29,6 +29,8 @@ def generate_launch_description():
             namespace='t1',
             executable='kongsberg_interface.py',
             name='kongsberg_interface',
+            respawn=True,
+            respawn_delay=4,
             parameters=[config]
         ),
     ])
