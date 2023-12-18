@@ -37,7 +37,45 @@ The shore station consists of Ubiquiti Bullet, an Edge Router, a Field Laptop, a
 
 ## Motor Controller
 
+The motor controller found on the vehicle is manufactured by Roboteq. **The operators manual can be found here:**
+[Motor Controller Manual](media/Motor%20Controller%20Users%20Manual.pdf)
+
+The syntax required for communication with the motor controller can be found in the user manual and is sumarized as follows:
+
+**Syntax: !Mnn**
+  * Where M=
+    * A: channel 1, forward direction
+    * a: channel 1, reverse direction
+    * B: channel 2, forward direction
+    * b: channel 2, reverse direction
+  * Where nn= Speed or position value   in 2 Hexadecimal digits from 00 to 7F (0 to 127 in decimal). Refer to the image below for direct converssions between hexadecimal and decimal.
+![](media/hexadecimal_to_decimal.png)
+
+Examples of correctly formatted commands are:
+* Motor 1 100% power forward: !A7F
+* Motor 2 50% power backward: !b3F
+
 ## Batteries
 
 ## Hulls and Mounts
 
+The mounts were sent to a third-party manufacturer called SendCutSend. **Find the DXF file that can be submitted here:**
+[DXF](media/Flat%20Truss%20Mount%20Manufacture.DXF)
+
+If you wish to modify or rebuild the part, find a 3D PDF and drawing screenshot below:
+[3D PDF](media/Truss%20Mount%20Manufactured.PDF)
+![](media/Truss Mount Manufacture.JPG)
+
+The mounts were manufactured out of 0.25" 5052 Aluminium. 
+![](media/Mounted Hulls.JPG)
+
+The following parts were ordered from McMaster Carr for use as fasteners:
+
+| Part Name     | Quantity                  | Link                                                     |
+|---------------|---------------------------|----------------------------------------------------------|
+| 6061 Al Pipes | ~1 per mount, cut to size | [McMaster](https://www.mcmaster.com/89965K411-89965K413) |
+| Bolts         | 4 per mount               |                                                          |
+| Lock Washers  | 4 per mount               |                                                          |
+
+The pipes were cut to length and welded into place. These attatch the hulls to the vehicle.
+![](/home/trevor/ros/trevor_ws/src/trevor/docs/media/Welded Mounts.jpg)
