@@ -39,6 +39,5 @@ The shore station consists of Ubiquiti Bullet, an Edge Router, a Field Laptop, a
 
 ## Batteries
 
-## Hulls
+## Hulls and Mounts
 
-## 
