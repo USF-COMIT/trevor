@@ -79,3 +79,13 @@ The following parts were ordered from McMaster Carr for use as fasteners:
 
 The pipes were cut to length and welded into place. These attatch the hulls to the vehicle.
 ![](/home/trevor/ros/trevor_ws/src/trevor/docs/media/Welded Mounts.jpg)
+
+## Multibeam Sonar Mount
+
+The entire multibeam mounting system consists of a mounting plate and a series of 8020 rails/brackets. This system was mounted to the lower I-beam structure of the USV.
+![](/home/trevor/ros/trevor_ws/src/trevor/docs/media/MB Mount  3.JPG)
+![](/home/trevor/ros/trevor_ws/src/trevor/docs/media/MB Mount  4.JPG)
+![](/home/trevor/ros/trevor_ws/src/trevor/docs/media/MB Mount 1.JPG)
+![](/home/trevor/ros/trevor_ws/src/trevor/docs/media/MB Mount  2.JPG)
+
+The mount plate was designed in SolidWorks and manufactured by SendCutSend, a third-party manufacturer. 
