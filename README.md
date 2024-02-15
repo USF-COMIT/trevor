@@ -51,6 +51,25 @@ each package has its own compile script for your convenience.   Just run each on
 ~/ros/project11_bridge/build.sh
 ```
 
+
+### sending code to the vehicle
+
+the code on the vehicle does not use git.   Instead, the repositories should be synced with rsync.   There is a script you can use to this in 
+```bash
+~/ros/trevor_ws/util/deploy.py
+```
+
+this will upload and build the code on trevor automatically for the trevor_ws. 
+
+For the other two workspace you need to upload them manually with an rsync command like this:
+```bash
+rsync -ravP --exclude-from='.gitignore' --exclude '.git*' ../trevor_project11_ws  trevor@trevor1.local:~/ --delete
+
+rsync -ravP --exclude-from='.gitignore' --exclude '.git*' ../project11_bridge  trevor@trevor1.local:~/ --delete
+```
+
+Then you must ssh into the vehicle and run the build script in the root of each workspace.   Be warned, the project11_bridge takes a long time so don't re-build unnecessarily.
+
 ## Getting Started
 
 To begin operations start  by visiting our [operators field guide](https://usf-comit.github.io/trevor/md_docs_2operators__field__guide.html) 
