@@ -4,6 +4,28 @@
 
 ## About
 
+TREVOR (Test Robotics Environment Vehicle for Ocean Research) is a prototype modular autonomous surface vehicle.   It was developed to test unmanned data collection of various environmental and geographical data.   In particular, the design focuses on multibeam echosounder data collection and mapping.  
+
+### Design Principles
+
+* **Open Source**
+  * Others can reproduce physical parts and software
+  * Promote external collaboration or extensions
+  * Well documented and reusable software
+  * Collaborate with partner institutions
+* **Efficient to produce at low/medium volumes**
+  * Contemporary manufacturing techniques
+  * 3D printing, laser cut by mail
+* **Repeatable**
+  * Can be produced easily with minimal tooling
+  * Software can be used with minimal skill operators
+* **Precise**
+  * Dimensionally accurate for precise survey offsets
+  * Reproducible, interchangeable parts
+* **TacoMax (modular) form factor**
+  * Max size for the bed of a medium pickup…such as a Toyota Tacoma
+
+
 ## Installation
 
 The Trevor ASV software leverages the CCOM project 11 repository for autonomoy features.  At this time, Project 11 is only offered as a ROS1 Package   Therefore, we will need to create 2 ROS worspaces and a bridge workspace to make it work.  Fortunately, we provide you with pre-configured repositories to do this with minimal fuss!   
