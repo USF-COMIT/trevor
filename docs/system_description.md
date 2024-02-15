@@ -95,6 +95,6 @@ The entire multibeam mounting system consists of a mounting plate and a series o
 
 The mount plate was designed in SolidWorks and manufactured out of 0.25" 5052 Aluminium by SendCutSend, a third-party manufacturer. Two spaces were also used to allow room for fasteners. The design files can be found below:
 
-![](media\Multibeam Mount Plate.JPG)
+![](media/Multibeam Mount Plate.JPG)
 ![3D PDF](media/Multibeam%20Mount%20Plate.pdf)
 ![DXF](media/Multibeam%20Mount%20Plate.DXF)
