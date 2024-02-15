@@ -53,6 +53,10 @@ each package has its own compile script for your convenience.   Just run each on
 
 ## Getting Started
 
+To begin operations start  by visiting our [operators field guide](https://usf-comit.github.io/trevor/md_docs_2operators__field__guide.html) 
+
+For additional documentation on the hardware, electronics, and software visit our [detailed documentation ](https://usf-comit.github.io/trevor)
+
 ## Credits
 
 This package was created by Dr. Kristopher Krasnosky and Jaden Crute of the [USF COMIT](https://github.com/USF-COMIT) group and offered under the Apache 2.0 License.
