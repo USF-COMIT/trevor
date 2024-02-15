@@ -15,7 +15,7 @@ USB Power is the preferred means of powering the 3DM-GQ7 aboard TREVOR.   USB po
 * The USB connection can be used on the "MAIN" port instead of a serial connection to facilitate the maximum possible data rates.
 * USB power is regulated by the device powering it.   This way the 3DM-GQ7's  will be powered on/off with the onboard computer thus preventing unnecessary uptime. &#x20;
 
-<mark style="color:red;">**WARNING:**</mark>** It is unsafe to power the device from multiple sources!  Do not connect 2 USB connections to different hosts (computers).   For additional details see the** [**powering**](https://s3.amazonaws.com/files.microstrain.com/GQ7+User+Manual/user\_manual\_content/installation/Powering.htm?Highlight=power)  **document from microstrain.** &#x20;
+@warning It is unsafe to power the device from multiple sources!  Do not connect 2 USB connections to different hosts (computers).   For additional details see the [**powering**](https://s3.amazonaws.com/files.microstrain.com/GQ7+User+Manual/user_manual_content/installation/Powering.htm)  **document from microstrain.**
 
 ## Wiring
 
@@ -23,11 +23,11 @@ USB Power is the preferred means of powering the 3DM-GQ7 aboard TREVOR.   USB po
 * The "AUX Port should be connected a [MICRO DB9/LEAD](https://www.mouser.com/ProductDetail/LORD-Microstrain/MICRO-DB9-LEADS?qs=sGAEpiMZZMv0DJfhVcWlK5aFAr7S0qM3tjIW1RAJLPR9gbnQxPldDg%3D%3D)
   * a custom cable MicroDB9 to DB9 with PPS breakout cable must be produced according to the schematic below
 
-|         ![](/home/kris/ros/trevor_ws/src/trevor/docs/media/microstrain_wiring.drawio.svg)         |
+|                             ![](media/microstrain_wiring.drawio.svg)                              |
 |:-------------------------------------------------------------------------------------------------:|
 | *A schematic showing the complete wiring diagram for the Microstrain 3DM-GQ7 to TREVOR interface* |
 
-| ![](/home/kris/ros/trevor_ws/src/trevor/docs/media/microstrain_interface_cable.jpeg) |
+| ![](media/microstrain_interface_cable.jpeg) |
 |:------------------------------------------------------------------------------------:|
 |               _A completed version of the microstrain interface cable_               |
 

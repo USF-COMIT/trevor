@@ -1,10 +1,10 @@
 # TREVOR Hardware Systems Description
 
 ## Communications schematic
-![](/home/kris/ros/trevor_ws/src/trevor/docs/media/trevor_comms_description.drawio.svg)
+![](media/trevor_comms_description.drawio.svg)
 
 ## Power Schematic
-![](/home/kris/ros/trevor_ws/src/trevor/docs/media/trevor_power_diagram.drawio.svg)
+![](media/trevor_power_diagram.drawio.svg)
 
 ## Onboard Computer
  The onboard computer is a Premio Fanless mini pc part no:  RCO-1000-EHL-J6413-20-P.   It is running ubuntu 20.04 with ROS1 Noetic and ROS2 Foxy.
@@ -67,7 +67,7 @@ If you wish to modify or rebuild the part, find a 3D PDF and drawing screenshot 
 ![](media/Truss Mount Manufacture.JPG)
 
 The mounts were manufactured out of 0.25" 5052 Aluminium. 
-![](media/Mounted Hulls.JPG)
+![](media/Mounted_Hulls.JPG)
 
 The following parts were ordered from McMaster Carr for use as fasteners:
 
@@ -78,14 +78,15 @@ The following parts were ordered from McMaster Carr for use as fasteners:
 | Lock Washers  | 4 per mount               |                                                          |
 
 The pipes were cut to length and welded into place. These attatch the hulls to the vehicle.
-![](/home/trevor/ros/trevor_ws/src/trevor/docs/media/Welded Mounts.jpg)
+![](media/Welded_Mounts.jpg)
 
 ## Multibeam Sonar Mount
 
 The entire multibeam mounting system consists of a mounting plate and a series of 8020 rails/brackets. This system was mounted to the lower I-beam structure of the USV.
-![](/home/trevor/ros/trevor_ws/src/trevor/docs/media/MB Mount  3.JPG)
-![](/home/trevor/ros/trevor_ws/src/trevor/docs/media/MB Mount  4.JPG)
-![](/home/trevor/ros/trevor_ws/src/trevor/docs/media/MB Mount 1.JPG)
-![](/home/trevor/ros/trevor_ws/src/trevor/docs/media/MB Mount  2.JPG)
+
+![](media/MB_Mount_3.JPG)
+![](media/MB_Mount_4.JPG)
+![](media/MB_Mount_1.JPG)
+![](media/MB_Mount_2.JPG)
 
 The mount plate was designed in SolidWorks and manufactured by SendCutSend, a third-party manufacturer. 
