@@ -9,7 +9,7 @@
 ## Onboard Computer
  The onboard computer is a Premio Fanless mini pc part no:  RCO-1000-EHL-J6413-20-P.   It is running ubuntu 20.04 with ROS1 Noetic and ROS2 Foxy.
  
-The full configuration can be found here:  [Premio Edge PC configuration](media/premio_description.pdf)
+The full configuration can be found here:  [Premio Edge PC configuration](premio_description.pdf)
 
 NOTE:   at this time we have not been able to communicate through COM3 and COM4.   As a temporary fix we have been using a USB-Serial adapter for additional serial ports.
 
@@ -38,7 +38,7 @@ The shore station consists of Ubiquiti Bullet, an Edge Router, a Field Laptop, a
 ## Motor Controller
 
 The motor controller found on the vehicle is manufactured by Roboteq. **The operators manual can be found here:**  
-[Motor Controller Manual](media/Motor_Controller_Users_Manual.pdf)
+[Motor Controller Manual](Motor_Controller_Users_Manual.pdf)
 
 The syntax required for communication with the motor controller can be found in the user manual and is sumarized as follows:  
 
@@ -58,10 +58,10 @@ Examples of correctly formatted commands are:
 ## Hulls and Mounts
 
 The mounts were sent to a third-party manufacturer called SendCutSend. **Find the DXF file that can be submitted here:**  
-[DXF](media/Flat_Truss_Mount_Manufacture.DXF)
+[DXF](Flat_Truss_Mount_Manufacture.DXF)
 
 If you wish to modify or rebuild the part, find a 3D PDF and drawing screenshot below:  
-[3D PDF](media/Truss_Mount_Manufactured.PDF)
+[3D PDF](Truss_Mount_Manufactured.PDF)
 ![](media/Truss_Mount_Manufacture.JPG)
 
 The mounts were manufactured out of 0.25" 5052 Aluminium.  
@@ -96,5 +96,5 @@ The entire multibeam mounting system consists of a mounting plate and a series o
 The mount plate was designed in SolidWorks and manufactured out of 0.25" 5052 Aluminium by SendCutSend, a third-party manufacturer. Two spaces were also used to allow room for fasteners. The design files can be found below:
 
 ![](media/Multibeam_Mount_Plate.JPG)  
-[3D PDF](media/Multibeam_Mount_Plate.pdf)  
-[DXF](media/Multibeam_Mount_Plate.DXF)
+[3D PDF](Multibeam_Mount_Plate.pdf)  
+[DXF](Multibeam_Mount_Plate.DXF)
