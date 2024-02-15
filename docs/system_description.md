@@ -55,8 +55,6 @@ Examples of correctly formatted commands are:
 * Motor 1 100% power forward: !A7F
 * Motor 2 50% power backward: !b3F
 
-## Batteries
-
 ## Hulls and Mounts
 
 The mounts were sent to a third-party manufacturer called SendCutSend. **Find the DXF file that can be submitted here:**
@@ -82,11 +80,21 @@ The pipes were cut to length and welded into place. These attatch the hulls to t
 
 ## Multibeam Sonar Mount
 
-The entire multibeam mounting system consists of a mounting plate and a series of 8020 rails/brackets. This system was mounted to the lower I-beam structure of the USV.
+The entire multibeam mounting system consists of a mounting plate and a series of 8020 rails/brackets. This system was mounted to the lower I-beam structure of the USV. The parts used for the 8020 rails can be found in the table below.
+
+| Part No.       | Qty | Link                                    |
+|----------------|-----|-----------------------------------------|
+| 3030-Lite (4') | 1   | [Link](https://8020.net/3030-lite.html) |
+| 4338           | 1   | [Link](https://8020.net/4338.html)      |
+| 4334           | 3   | [Link](https://8020.net/4334.html)      |
+| 1515 (14")     | 1   | [Link](https://8020.net/1515.html)      |
 
 ![](media/MB_Mount_3.JPG)
-![](media/MB_Mount_4.JPG)
 ![](media/MB_Mount_1.JPG)
 ![](media/MB_Mount_2.JPG)
 
-The mount plate was designed in SolidWorks and manufactured by SendCutSend, a third-party manufacturer. 
+The mount plate was designed in SolidWorks and manufactured out of 0.25" 5052 Aluminium by SendCutSend, a third-party manufacturer. Two spaces were also used to allow room for fasteners. The design files can be found below:
+
+![](media\Multibeam Mount Plate.JPG)
+![3D PDF](media/Multibeam%20Mount%20Plate.pdf)
+![DXF](media/Multibeam%20Mount%20Plate.DXF)
