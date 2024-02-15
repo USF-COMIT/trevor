@@ -14,6 +14,7 @@ ament_python_install_package(${PROJECT_NAME})
 install(PROGRAMS
   scripts/pilot.py
   scripts/project11_interface.py
+  scripts/kongsberg_interface.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

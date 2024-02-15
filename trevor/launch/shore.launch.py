@@ -25,12 +25,12 @@ def generate_launch_description():
                 {"coalesce_interval_ms": 100}
             ]
         ),
-        Node(
-            package='rqt_image_view',
-            namespace='t1',
-            executable='rqt_image_view',
-            name='rqt_image_view',
-            parameters=[]
-        ),
+        # Node(
+        #     package='rqt_image_view',
+        #     namespace='t1',
+        #     executable='rqt_image_view',
+        #     name='rqt_image_view',
+        #     parameters=[]
+        # ),
         append_launch('trevor_urdf','display.launch.py')
     ])

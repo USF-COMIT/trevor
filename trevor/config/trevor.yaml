@@ -1,0 +1,22 @@
+t1:
+    kongsberg_interface:
+        ros__parameters:
+            sub:
+                odom_topic: '/t1/nav/sensors/nav/odom' # odom messages for orientation data
+                fix_topic:  '/t1/nav/sensors/nav/fix' # these topics will be converted to GGA and sent to the kongsberg unit
+                nmea_topic: '/t1/nav/sensors/nmea/sentence' # NMEA directly from the microstrain for ZDA messages
+            nmea:
+                zda_id: '$GNZDA'  # The ID for microstrain ZDA
+                gga_id: '$--GGA'  # this will cause no gga messages to be sent since they don't match the ID
+            serial:
+                nmea:
+                    port: '/dev/ttyS1'
+                    baud: 115200
+            udp:
+                ip:     '192.168.1.102'  # the IP of the kongsberg unit
+                port:   3000
+
+    roboteq_esc:
+        ros__parameters:
+            joy_topic:  'joy'
+            esc_port:   '/dev/ttyUSB0'
