@@ -37,10 +37,10 @@ The shore station consists of Ubiquiti Bullet, an Edge Router, a Field Laptop, a
 
 ## Motor Controller
 
-The motor controller found on the vehicle is manufactured by Roboteq. **The operators manual can be found here:**
-[Motor Controller Manual](media/Motor%20Controller%20Users%20Manual.pdf)
+The motor controller found on the vehicle is manufactured by Roboteq. **The operators manual can be found here:**  
+[Motor Controller Manual](media/Motor_Controller_Users_Manual.pdf)
 
-The syntax required for communication with the motor controller can be found in the user manual and is sumarized as follows:
+The syntax required for communication with the motor controller can be found in the user manual and is sumarized as follows:  
 
 **Syntax: !Mnn**
   * Where M=
@@ -48,7 +48,7 @@ The syntax required for communication with the motor controller can be found in 
     * a: channel 1, reverse direction
     * B: channel 2, forward direction
     * b: channel 2, reverse direction
-  * Where nn= Speed or position value   in 2 Hexadecimal digits from 00 to 7F (0 to 127 in decimal). Refer to the image below for direct converssions between hexadecimal and decimal.
+  * Where nn= Speed or position value   in 2 Hexadecimal digits from 00 to 7F (0 to 127 in decimal). Refer to the image below for direct conversions between hexadecimal and decimal.  
 ![](media/hexadecimal_to_decimal.png)
 
 Examples of correctly formatted commands are:
@@ -57,17 +57,17 @@ Examples of correctly formatted commands are:
 
 ## Hulls and Mounts
 
-The mounts were sent to a third-party manufacturer called SendCutSend. **Find the DXF file that can be submitted here:**
-[DXF](media/Flat%20Truss%20Mount%20Manufacture.DXF)
+The mounts were sent to a third-party manufacturer called SendCutSend. **Find the DXF file that can be submitted here:**  
+[DXF](media/Flat_Truss_Mount_Manufacture.DXF)
 
-If you wish to modify or rebuild the part, find a 3D PDF and drawing screenshot below:
-[3D PDF](media/Truss%20Mount%20Manufactured.PDF)
-![](media/Truss Mount Manufacture.JPG)
+If you wish to modify or rebuild the part, find a 3D PDF and drawing screenshot below:  
+[3D PDF](media/Truss_Mount_Manufactured.PDF)
+![](media/Truss_Mount_Manufacture.JPG)
 
-The mounts were manufactured out of 0.25" 5052 Aluminium. 
+The mounts were manufactured out of 0.25" 5052 Aluminium.  
 ![](media/Mounted_Hulls.JPG)
 
-The following parts were ordered from McMaster Carr for use as fasteners:
+The following parts were ordered from McMaster Carr for use as fasteners:  
 
 | Part Name     | Quantity                  | Link                                                     |
 |---------------|---------------------------|----------------------------------------------------------|
@@ -75,12 +75,12 @@ The following parts were ordered from McMaster Carr for use as fasteners:
 | Bolts         | 4 per mount               |                                                          |
 | Lock Washers  | 4 per mount               |                                                          |
 
-The pipes were cut to length and welded into place. These attatch the hulls to the vehicle.
+The pipes were cut to length and welded into place. These attatch the hulls to the vehicle.  
 ![](media/Welded_Mounts.jpg)
 
 ## Multibeam Sonar Mount
 
-The entire multibeam mounting system consists of a mounting plate and a series of 8020 rails/brackets. This system was mounted to the lower I-beam structure of the USV. The parts used for the 8020 rails can be found in the table below.
+The entire multibeam mounting system consists of a mounting plate and a series of 8020 rails/brackets. This system was mounted to the lower I-beam structure of the USV. The parts used for the 8020 rails can be found in the table below.  
 
 | Part No.       | Qty | Link                                    |
 |----------------|-----|-----------------------------------------|
@@ -89,12 +89,12 @@ The entire multibeam mounting system consists of a mounting plate and a series o
 | 4334           | 3   | [Link](https://8020.net/4334.html)      |
 | 1515 (14")     | 1   | [Link](https://8020.net/1515.html)      |
 
-![](media/MB_Mount_3.JPG)
-![](media/MB_Mount_1.JPG)
-![](media/MB_Mount_2.JPG)
+![](media/MB_Mount_3.JPG)  
+![](media/MB_Mount_1.JPG)  
+![](media/MB_Mount_2.JPG)  
 
 The mount plate was designed in SolidWorks and manufactured out of 0.25" 5052 Aluminium by SendCutSend, a third-party manufacturer. Two spaces were also used to allow room for fasteners. The design files can be found below:
 
-![](media/Multibeam Mount Plate.JPG)
-![3D PDF](media/Multibeam%20Mount%20Plate.pdf)
-![DXF](media/Multibeam%20Mount%20Plate.DXF)
+![](media/Multibeam_Mount_Plate.JPG)  
+[3D PDF](media/Multibeam_Mount_Plate.pdf)  
+[DXF](media/Multibeam_Mount_Plate.DXF)
