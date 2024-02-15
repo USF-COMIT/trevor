@@ -19,20 +19,17 @@ On the control laptop...
   ```
   
 * the first repo we need is the [ROS2 workspace for trevor things](https://github.com/USF-COMIT/trevor_ws)
-
   ```bash
-  git clone https://github.com/USF-COMIT/trevor_ws.git
+  git clone --recurse-submodules https://github.com/USF-COMIT/trevor_ws.git
   ```
 * next let's get the [project11 related stuff](https://github.com/USF-COMIT/trevor_project11_ws)
-
   ```bash
-  git clone https://github.com/USF-COMIT/trevor_project11_ws.git
+  git clone --recurse-submodules https://github.com/USF-COMIT/trevor_project11_ws.git
   ```
   
-* finally, grab the [project 11 bridge](https://github.com/USF-COMIT/project11_bridge) to link everthing together
-
+* finally, grab the [project 11 bridge](https://github.com/USF-COMIT/project11_bridge) to link everything together
   ```bash
-  git clone https://github.com/USF-COMIT/project11_bridge.git
+  git clone --recurse-submodules https://github.com/USF-COMIT/project11_bridge.git
   ```
   
 * now get all the dependencies.   Note that because we are on foxy we need ot use a special rosdep update command
@@ -46,6 +43,13 @@ On the control laptop...
   
 
 ### Compile
+
+each package has its own compile script for your convenience.   Just run each one!
+```bash
+~/ros/trevor_ws/build.sh
+~/ros/trevor_project11_ws/build.sh
+~/ros/project11_bridge/build.sh
+```
 
 ## Getting Started
 
