@@ -5,6 +5,7 @@ on:
       - master
       - main
       - devel
+      - release/*
       
   workflow_dispatch:
 
