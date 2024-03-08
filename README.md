@@ -1,10 +1,10 @@
-# The TREVOR ASV
+# The TREVOR USV
 
 ![](docs/media/trevor_on_davit.jpeg)
 
 ## About
 
-TREVOR (Test Robotics Environment Vehicle for Ocean Research) is a prototype modular autonomous surface vehicle.   It was developed to test unmanned data collection of various environmental and geographical data.   In particular, the design focuses on multibeam echosounder data collection and mapping.  
+TREVOR (Test Robotics Environment Vehicle for Ocean Research) is a prototype modular uncrewed surface vehicle (USV). The base vehicle was originally developed circa 2007-2008 as a tool for conducting seagrass surveys in shallow estuarine environments. In early 2023, it was reimagined by COMIT as a testing platform for hardware and software aimed at acquiring various types of hydrospatial data. The vehicle was rechristened as TREVOR and underwent a thorough retrofit to support this new mission. Nearly all non-structural components (electronics, communications, power) were completely replaced and many structural components were updated or significantly modified. The new design is intended to be flexible and has an initial focus on multibeam echosounders integrated with other sensors for seafloor mapping.  
 
 ### Design Principles
 
