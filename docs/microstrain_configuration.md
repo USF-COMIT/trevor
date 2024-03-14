@@ -20,8 +20,7 @@ USB Power is the preferred means of powering the 3DM-GQ7 aboard TREVOR.   USB po
 ## Wiring
 
 * The "MAIN" port should be connected through the [USB Cable Kit for AHRS/IMU](https://www.mouser.com/ProductDetail/LORD-Microstrain/USB-Cable-Kit-for-AHRS-IMU?qs=sGAEpiMZZMv0DJfhVcWlK5aFAr7S0qM3xYSZm%252BchY8P6Mfa77UUN2A%3D%3D) directly to the onboard computer aboard TREVOR.
-* The "AUX Port should be connected a [MICRO DB9/LEAD](https://www.mouser.com/ProductDetail/LORD-Microstrain/MICRO-DB9-LEADS?qs=sGAEpiMZZMv0DJfhVcWlK5aFAr7S0qM3tjIW1RAJLPR9gbnQxPldDg%3D%3D)
-  * a custom cable MicroDB9 to DB9 with PPS breakout cable must be produced according to the schematic below
+* The "AUX" Port should be connected through a [MICRO DB9/LEAD](https://www.mouser.com/ProductDetail/LORD-Microstrain/MICRO-DB9-LEADS?qs=sGAEpiMZZMv0DJfhVcWlK5aFAr7S0qM3tjIW1RAJLPR9gbnQxPldDg%3D%3D) using a custom MicroDB9 to DB9 with PPS breakout cable. This cable must be produced according to the schematic below.
 
 |                             ![](media/microstrain_wiring.drawio.svg)                              |
 |:-------------------------------------------------------------------------------------------------:|
