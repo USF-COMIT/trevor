@@ -14,9 +14,12 @@ filter_child_frame_id : "ins"
 #     For GQ7 - in the vehicle frame wrt IMU origin (meters)
 #     For all other models - in the IMU frame wrt IMU origin (meters)
 #     Note: Make this as accurate as possible for good performance
-gnss1_antenna_offset : [-0.8128, 0.2921, 0.1524]
+#     Coordinates: [fwd(+)/aft(-), stbd(+)/port(-), up(+)/down(-)]
+gnss1_antenna_offset : [-0.8128, 0.2921, 0.1524] 
 
-gnss2_antenna_offset : [-0.8128, -0.2921, 0.1524]
+# gnss2_antenna_offset : [-0.8128, -0.2921, 0.1524] <--original antenna 2 offset
+# Antenna 2 formerly aft, port, and up wrt IMU origin. Relocated to forward, starboard, and up wrt IMU origin on 10 June 2024.
+gnss2_antenna_offset : [0.9747, 0.0381, 0.1794]
 
 filter_data_rate: 50
 
