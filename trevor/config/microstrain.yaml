@@ -17,9 +17,16 @@ filter_child_frame_id : "ins"
 #     Coordinates: [fwd(+)/aft(-), stbd(+)/port(-), up(+)/down(-)]
 gnss1_antenna_offset : [-0.8128, 0.2921, 0.1524] 
 
-# gnss2_antenna_offset : [-0.8128, -0.2921, 0.1524] <--original antenna 2 offset
-# Antenna 2 formerly aft, port, and up wrt IMU origin. Relocated to forward, starboard, and up wrt IMU origin on 10 June 2024.
-gnss2_antenna_offset : [0.9747, 0.0381, 0.1794]
+# gnss2_antenna_offset : [-0.8128, -0.2921, 0.1524]
+#   Above coordinates are the original Antenna 2 offset.
+#   Antenna 2 formerly aft, port, and up wrt IMU origin. Relocated to forward, starboard, and up wrt IMU origin on 10 June 2024.
+#   A2 wrt A1 : [1.7264 , -0.2692, 0.0267]
+
+# Matt's precision eyeballing with tape measure
+# gnss2_antenna_offset : [0.9747, 0.0381, 0.1794]
+
+# Jaden's vehicle model (which includes manufacturer drawings and precision eyeballing with tape measure)
+gnss2_antenna_offset : [0.9136, 0.0229, 0.1257]
 
 filter_data_rate: 50
 
