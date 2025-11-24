@@ -96,7 +96,8 @@ You can open a version of ROS 1 or 2 RQT GUI using the icons at the left. These 
 
 ```
 
-[!WARNING] The microstrain RQT gui plugin seems to hammer the network heavily. Make sure it's off when not actively in use. 
+> [!WARNING]
+> The microstrain RQT gui plugin seems to hammer the network heavily. Make sure it's off when not actively in use. 
 
 * Click OK
 
